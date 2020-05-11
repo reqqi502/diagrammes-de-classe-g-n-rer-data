@@ -1,57 +1,46 @@
-/*==============================================================*/
-/* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  29/04/2020 04:48:35                      */
-/*==============================================================*/
-
-
-drop table if exists Article;
-
-drop table if exists Client;
-
-drop table if exists Commande;
-
-/*==============================================================*/
-/* Table : Article                                              */
-/*==============================================================*/
-create table Article
+create table Entreprise
 (
-   RefArt               int not null,
-   Nom                  varchar(254),
-   Prix                 varchar(254),
-   primary key (RefArt),
-   key AK_Identifiant_1 (RefArt)
+   numE                 int not null,
+   nom                  varchar(254),
+   location             varchar(254),
+   description          varchar(254),
+   primary key (numE)
 );
 
-/*==============================================================*/
-/* Table : Client                                               */
-/*==============================================================*/
-create table Client
+create table Departement
 (
-   IdComm               float,
-   NCin                 int,
-   Nom                  varchar(254),
-   Prenom               varchar(254),
-   Tele                 int
+   numD                 int not null,
+   numE                 int not null,
+   nom                  varchar(254),
+   chefD                varchar(254),
+   description          varchar(254),
+   primary key (numD),
+    FOREIGN KEY (numE) REFERENCES entreprise(numE) on update cascade on delete cascade
 );
 
-/*==============================================================*/
-/* Table : Commande                                             */
-/*==============================================================*/
-create table Commande
+
+create table Salarie
 (
-   IdComm               float not null,
-   Art_RefArt           int not null,
-   NCin                 int,
-   RefArt               int,
-   Quantite             int,
-   primary key (IdComm),
-   key AK_Identifiant_1 (IdComm),
-   key AK_Identifiant_2 (IdComm)
+   numS                 int not null,
+   numD                 int not null,
+   nom                  varchar(254),
+   prenom               varchar(254),
+   age                  int,
+   salaire              int,
+   primary key (numS),
+    FOREIGN KEY (numD) REFERENCES departement(numD) on update cascade on delete cascade
 );
 
-alter table Client add constraint FK_Association2 foreign key (IdComm)
-      references Commande (IdComm) on delete restrict on update restrict;
+INSERT INTO entreprise VALUES (2,'Raddes','safi','azib dari');
+INSERT INTO departement VALUES (4,'onep','reqqi','test');
+INSERT INTO salarie VALUES (1,'khalid','onep','hdsbc',30,6000dh);
 
-alter table Commande add constraint FK_Association1 foreign key (Art_RefArt)
-      references Article (RefArt) on delete restrict on update restrict;
+
+UPDATE entreprise SET location='safi' WHERE numE=2;
+UPDATE departement SET nom='tsm' WHERE numD=4;
+UPDATE salarie SET salaire='6000' WHERE 1;
+
+DELETE FROM entreprise WHERE numE=2;
+DELETE FROM departement WHERE numD=4;
+DELETE FROM salarie WHERE numS=2;
 
