@@ -1,3 +1,6 @@
+create database gestionh;
+CREATE USER 'non-root'@'localhost' IDENTIFIED BY '123';
+GRANT ALL PRIVILEGES ON * . * TO 'non-root'@'localhost';
 create table Entreprise
 (
    numE                 int not null,
@@ -31,18 +34,18 @@ create table Salarie
     FOREIGN KEY (numD) REFERENCES departement(numD) on update cascade on delete cascade
 );
 
-INSERT INTO entreprise VALUES (2,'Raddes','safi','azib dari');
-INSERT INTO departement VALUES (4,'onep','reqqi','test');
-INSERT INTO salarie VALUES (1,'khalid','onep','hdsbc',30,6000dh);
+INSERT INTO entreprise VALUES (1,'youcode','safi','welcome');
+INSERT INTO departement VALUES (1,1,'tri','akram','reqqi');
+INSERT INTO salarie VALUES (1,1,'reqqi','akram',23,1000);
 
 
-UPDATE entreprise SET location='safi' WHERE numE=2;
-UPDATE departement SET nom='tsm' WHERE numD=4;
-UPDATE salarie SET salaire='6000' WHERE 1;
+UPDATE entreprise SET location='agadir' WHERE numE=1;
+UPDATE departement SET nom='tsm' WHERE numD=1;
+UPDATE salarie SET salaire='5000' WHERE 1;
 
-DELETE FROM entreprise WHERE numE=2;
-DELETE FROM departement WHERE numD=4;
-DELETE FROM salarie WHERE numS=2;
+DELETE FROM entreprise WHERE numE=1;
+DELETE FROM departement WHERE numD=1;
+DELETE FROM salarie WHERE numS=1;
 
 
 
